@@ -1,0 +1,25 @@
+{
+  "name": "its-420-somewhere",
+  "version": "1.0.0",
+  "description": "It's 4:20 somewhere — a live globe of where the next 4:20 is",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/three": "^0.187.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "globe.gl": "^2.46.2",
+    "three": "^0.187.0"
+  }
+}

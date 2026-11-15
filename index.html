@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>It's 4:20 somewhere</title>
+    <meta name="description" content="A live globe that rotates to wherever it's 4:20 next, with a quick look at local cannabis law and culture." />
+    <meta name="theme-color" content="#06100b" />
+    <meta property="og:title" content="It's 4:20 somewhere" />
+    <meta property="og:description" content="A live globe that spins to the nearest 4:20, with local cannabis law and culture." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="globe" aria-hidden="true"></div>
+
+    <header class="top">
+      <h1>It's 4:20 <em>somewhere</em></h1>
+      <p class="your-time">Your time <strong id="your-clock">--:--:--</strong></p>
+    </header>
+
+    <aside id="card" class="card" aria-live="polite"></aside>
+
+    <footer class="foot">
+      <span>Informational only, not legal advice. Laws change and differ by region, so check official sources. Never drive impaired, and only where and when it's legal for you.</span>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
