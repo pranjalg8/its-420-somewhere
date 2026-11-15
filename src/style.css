@@ -55,6 +55,39 @@ html, body {
 }
 .your-time strong { color: var(--fg); font-weight: 500; margin-left: 4px; }
 
+.your-next { margin: 4px 0 0; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+body.you-live .your-next { color: var(--green); font-weight: 600; }
+.locate {
+  pointer-events: auto;
+  margin-top: 10px;
+  padding: 7px 12px;
+  border-radius: 99px;
+  cursor: pointer;
+  font: 500 13px Inter, sans-serif;
+  color: var(--fg);
+  background: var(--glass);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.locate:hover { border-color: rgba(74, 222, 128, 0.5); }
+
+.me-pin { display: flex; align-items: center; gap: 6px; pointer-events: none; transform: translate(-6px, -50%); }
+.me-pin i {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #fff; border: 3px solid #38bdf8;
+  box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+  animation: me-pulse 1.8s ease-out infinite;
+}
+.me-pin span {
+  font: 600 11px Inter, sans-serif; color: #fff;
+  padding: 2px 6px; border-radius: 6px; background: rgba(6, 16, 11, 0.75);
+}
+@keyframes me-pulse { to { box-shadow: 0 0 0 14px rgba(56, 189, 248, 0); } }
+
+.dist { margin: 6px 0 0; font-size: 13px; color: #7dd3fc; }
+.dist:empty { display: none; }
+
 /* ---------- card ---------- */
 .card {
   position: fixed;

@@ -1,7 +1,7 @@
 import Globe from 'globe.gl';
 import './style.css';
 import { PLACES, STATUS_META, type Place } from './places';
-import { rank, hms, clock, flag, statusFor, type Status } from './engine';
+import { rank, hms, clock, flag, statusFor, distanceKm, type Status } from './engine';
 
 const BASE = import.meta.env.BASE_URL;
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -21,6 +21,17 @@ let renderedId: string | null = null; // place the card currently shows
 let featuredId = PLACES[0].id;
 let lastInteract = 0;
 let ringKey = '';
+let arcKey = '';
+
+// Where the viewer is. Starts as a guess from their time zone (no permission needed);
+// "Find me" upgrades it to a precise browser location, which never leaves the device.
+interface Me { lat: number; lng: number; precise: boolean }
+const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+// Browsers may report an alias (e.g. Asia/Calcutta for Asia/Kolkata), so compare canonical names.
+const canon = (tz: string) => new Intl.DateTimeFormat('en', { timeZone: tz }).resolvedOptions().timeZone;
+const userCanon = canon(userTz);
+const tzGuess = PLACES.find((p) => canon(p.tz) === userCanon);
+let me: Me | null = tzGuess ? { lat: tzGuess.lat, lng: tzGuess.lng, precise: false } : null;
 
 // ---------- globe ----------
 const world = new Globe($('globe'), { animateIn: true })
@@ -53,6 +64,73 @@ const world = new Globe($('globe'), { animateIn: true })
   .labelAltitude(0.14)
   .labelColor(() => '#ffffff')
   .labelResolution(3);
+
+// "You are here" marker and an arc from you to the featured place
+interface Arc { sLat: number; sLng: number; eLat: number; eLng: number }
+world
+  .htmlElementsData(me ? [me] : [])
+  .htmlLat('lat')
+  .htmlLng('lng')
+  .htmlAltitude(0.02)
+  .htmlElement(() => {
+    const el = document.createElement('div');
+    el.className = 'me-pin';
+    el.innerHTML = '<i></i><span>You</span>';
+    return el;
+  })
+  .arcsData([])
+  .arcStartLat((d) => (d as Arc).sLat)
+  .arcStartLng((d) => (d as Arc).sLng)
+  .arcEndLat((d) => (d as Arc).eLat)
+  .arcEndLng((d) => (d as Arc).eLng)
+  .arcColor(() => ['rgba(125, 211, 252, 0.15)', 'rgba(74, 222, 128, 0.95)'])
+  .arcStroke(0.45)
+  .arcAltitudeAutoScale(0.35)
+  .arcDashLength(0.4)
+  .arcDashGap(0.2)
+  .arcDashAnimateTime(2600);
+
+function syncArc(p: Place) {
+  const far = me ? distanceKm(me.lat, me.lng, p.lat, p.lng) > 150 : false;
+  const key = me && far ? `${me.lat},${me.lng}>${p.id}` : '';
+  if (key === arcKey) return;
+  arcKey = key;
+  world.arcsData(me && far ? [{ sLat: me.lat, sLng: me.lng, eLat: p.lat, eLng: p.lng }] : []);
+}
+
+function flyToMe() {
+  if (!me) return;
+  lastInteract = Date.now(); // keep auto-follow from yanking the camera away right now
+  world.pointOfView({ lat: me.lat, lng: me.lng, altitude: isMobile() ? 2.3 : 1.7 }, 1800);
+}
+
+const locateBtn = $<HTMLButtonElement>('locate');
+const LOCATE_LABEL = '📍 Find me';
+locateBtn.addEventListener('click', () => {
+  if (me?.precise) return flyToMe();
+  if (!navigator.geolocation) {
+    flyToMe();
+    return;
+  }
+  locateBtn.textContent = 'Locating…';
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      me = { lat: pos.coords.latitude, lng: pos.coords.longitude, precise: true };
+      world.htmlElementsData([me]);
+      arcKey = '';
+      locateBtn.textContent = LOCATE_LABEL;
+      flyToMe();
+      update();
+    },
+    () => {
+      // permission denied or unavailable: keep the time-zone guess
+      locateBtn.textContent = me ? '📍 Using your time zone' : '📍 Location unavailable';
+      setTimeout(() => (locateBtn.textContent = LOCATE_LABEL), 3500);
+      flyToMe();
+    },
+    { timeout: 10000, maximumAge: 600000 },
+  );
+});
 
 const controls = world.controls();
 controls.autoRotate = false;
@@ -103,6 +181,7 @@ function renderCard(p: Place) {
     <div class="chip" id="chip"></div>
     <h2>${flag(p.cc)} ${p.city}</h2>
     <p class="region">${p.region}</p>
+    <p class="dist" id="dist"></p>
     <div class="count" id="count"></div>
     <p class="local">Local time <strong id="local"></strong></p>
     <div class="law ${warn ? 'warn' : ''}">
@@ -137,6 +216,13 @@ function updateCard(now: Date, ranked: Status[], group: Status[], featured: Stat
   }
   card.style.setProperty('--accent', color);
   $('local').textContent = clock(now, p.tz);
+
+  const km = me ? Math.round(distanceKm(me.lat, me.lng, p.lat, p.lng)) : 0;
+  $('dist').textContent = me
+    ? km < 50
+      ? `📍 You're here${me.precise ? '' : ' (approx.)'}`
+      : `📍 ${km.toLocaleString()} km from you${me.precise ? '' : ' (approx.)'}`
+    : '';
 
   const others = group.filter((s) => s.place.id !== p.id).map((s) => s.place.city);
   $('same').innerHTML = others.length
@@ -231,7 +317,14 @@ function update() {
 
   updateCard(now, ranked, ranked.filter((s) => s.until === featured.until), featured);
 
-  $('your-clock').textContent = `${clock(now, Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
+  syncArc(p);
+
+  $('your-clock').textContent = clock(now, userTz);
+  const mine = statusFor({ tz: userTz } as Place, now);
+  $('your-next').textContent = mine.now
+    ? `It's ${mine.label} where you are 🌿`
+    : `Your next 4:20: ${mine.label} in ${hms(mine.until)}`;
+  document.body.classList.toggle('you-live', mine.now);
   document.title = featured.now ? `It's 4:20 in ${p.city}! 🌿` : "It's 4:20 somewhere";
   document.body.classList.toggle('is-live', live.length > 0);
 }
