@@ -27,19 +27,19 @@ export const STATUS_META: Record<LegalStatus, { label: string; color: string; bl
 export const PLACES: Place[] = [
   {
     id: 'honolulu', city: 'Honolulu', region: 'Hawaii, USA', cc: 'US', lat: 21.31, lng: -157.86, tz: 'Pacific/Honolulu', status: 'medical',
-    legal: 'Medical cannabis has been legal since 2000, with dispensaries since 2017. Adult recreational sale is not legal; small amounts (up to 3 g) are decriminalised. Still illegal under US federal law.',
+    legal: 'Medical cannabis has been legal since 2000, with dispensaries since 2017. Adult recreational sale is not legal; small amounts (up to 3 g) are decriminalised. Adult use remains illegal under US federal law.',
     culture: 'Island strains like Maui Wowie and Kona Gold became counterculture legends in the 1970s.',
     wiki: 'Cannabis_in_Hawaii',
   },
   {
     id: 'anchorage', city: 'Anchorage', region: 'Alaska, USA', cc: 'US', lat: 61.22, lng: -149.9, tz: 'America/Anchorage', status: 'legal',
-    legal: 'Adult use legal since 2015 after a 2014 ballot measure, with licensed shops and on-site consumption. Illegal under US federal law.',
+    legal: 'Adult use legal since 2015 after a 2014 ballot measure, with licensed shops and on-site consumption. Adult use remains illegal under US federal law.',
     culture: 'A 1975 state court ruling (Ravin v. State) protected home possession decades before legalisation.',
     wiki: 'Cannabis_in_Alaska',
   },
   {
     id: 'la', city: 'Los Angeles', region: 'California, USA', cc: 'US', lat: 34.05, lng: -118.24, tz: 'America/Los_Angeles', status: 'legal',
-    legal: 'Adult use legal since Prop 64 (2016); licensed retail opened in 2018. 21+ only. Still illegal under US federal law.',
+    legal: 'Adult use legal since Prop 64 (2016); licensed retail opened in 2018. 21+ only. Adult use remains illegal under US federal law.',
     culture: 'California is home to the "420" origin story: a group of San Rafael High students, the Waldos, in 1971.',
     wiki: 'Cannabis_in_California',
   },
@@ -51,7 +51,7 @@ export const PLACES: Place[] = [
   },
   {
     id: 'mexico-city', city: 'Mexico City', region: 'Mexico', cc: 'MX', lat: 19.43, lng: -99.13, tz: 'America/Mexico_City', status: 'decriminalised',
-    legal: 'Small amounts have been decriminalised since 2009, and Supreme Court rulings (2018, 2021) say adults cannot be punished for personal use. There is no working commercial retail system yet.',
+    legal: 'Small amounts have been decriminalised since 2009, and Supreme Court rulings (2018, 2021) say adults cannot be punished for personal use. There is no licensed commercial retail system yet, though Congress has been working on a regulation bill.',
     culture: 'Cannabis ("mariguana") is baked into folk culture, from corridos to the verses of "La Cucaracha".',
     wiki: 'Cannabis_in_Mexico',
   },
@@ -63,7 +63,7 @@ export const PLACES: Place[] = [
   },
   {
     id: 'bogota', city: 'Bogotá', region: 'Colombia', cc: 'CO', lat: 4.71, lng: -74.07, tz: 'America/Bogota', status: 'decriminalised',
-    legal: 'Personal dose (about 20 g) decriminalised by the Constitutional Court; medical cannabis legal since 2016. Adult-use legalisation bills have repeatedly failed.',
+    legal: 'Personal dose (about 20 g) decriminalised by the Constitutional Court; medical cannabis legal since 2016, and home growing of up to 20 plants is allowed. Adult-use legalisation bills have repeatedly stalled; one advanced in Congress in 2026, so check its status.',
     culture: 'A fast-growing licensed medical cannabis export industry.',
     wiki: 'Cannabis_in_Colombia',
   },
@@ -75,7 +75,7 @@ export const PLACES: Place[] = [
   },
   {
     id: 'new-york', city: 'New York', region: 'New York, USA', cc: 'US', lat: 40.71, lng: -74.0, tz: 'America/New_York', status: 'legal',
-    legal: 'Adult use legal since March 2021; the first licensed shops opened in December 2022. 21+. Still illegal under US federal law.',
+    legal: 'Adult use legal since March 2021; the first licensed shops opened in December 2022. 21+. Adult use remains illegal under US federal law.',
     culture: 'The state prioritised licences for people harmed by past enforcement. Washington Square Park is a classic 4/20 meet-up spot.',
     wiki: 'Cannabis_in_New_York_(state)',
   },
@@ -105,7 +105,7 @@ export const PLACES: Place[] = [
   },
   {
     id: 'sao-paulo', city: 'São Paulo', region: 'Brazil', cc: 'BR', lat: -23.55, lng: -46.63, tz: 'America/Sao_Paulo', status: 'decriminalised',
-    legal: 'In 2024 the Supreme Court ruled personal possession (up to 40 g) is not a crime, though it remains an offence handled administratively; sale is illegal. Medical use is allowed with ANVISA approval.',
+    legal: 'In 2024 the Supreme Court ruled personal possession (up to 40 g or six plants) is not a crime, though it remains an offence handled administratively; sale is illegal. Medical use is allowed with ANVISA approval.',
     culture: 'The "Marcha da Maconha" (Marijuana March) takes place each year in Brazilian cities.',
     wiki: 'Cannabis_in_Brazil',
   },
@@ -141,37 +141,37 @@ export const PLACES: Place[] = [
   },
   {
     id: 'amsterdam', city: 'Amsterdam', region: 'Netherlands', cc: 'NL', lat: 52.37, lng: 4.9, tz: 'Europe/Amsterdam', status: 'decriminalised',
-    legal: 'Technically illegal but tolerated: licensed coffeeshops may sell up to 5 g per person per day. Supply to shops is still illegal; a regulated-supply trial runs in several other towns. Some cities limit sales to residents.',
+    legal: 'Technically illegal but tolerated: licensed coffeeshops may sell up to 5 g per person per day. Supply to shops is still illegal; since April 2025 a regulated-supply trial has run in ten other municipalities (such as Breda and Tilburg), planned to continue to 2029. Some cities limit sales to residents.',
     culture: 'Coffeeshops date from the 1970s, and the first Cannabis Cup was held here in 1988.',
     wiki: 'Cannabis_in_the_Netherlands',
   },
   {
     id: 'berlin', city: 'Berlin', region: 'Germany', cc: 'DE', lat: 52.52, lng: 13.4, tz: 'Europe/Berlin', status: 'legal',
-    legal: 'Since April 2024, adults 18+ may carry 25 g in public, keep 50 g at home and grow 3 plants; non-profit cannabis clubs are allowed. No commercial shops, and politicians keep debating changes.',
+    legal: 'Since April 2024, adults 18+ may carry 25 g in public, keep 50 g at home and grow 3 plants; non-profit cannabis clubs are allowed. No commercial shops. Medical prescribing rules were tightened by a 2026 amendment, and politicians keep debating the adult-use rules.',
     culture: 'The Hanfparade (Hemp Parade) has marched through Berlin since 1997.',
     wiki: 'Cannabis_in_Germany',
   },
   {
     id: 'barcelona', city: 'Barcelona', region: 'Spain', cc: 'ES', lat: 41.39, lng: 2.17, tz: 'Europe/Madrid', status: 'decriminalised',
-    legal: 'Private use and home growing are not crimes, but use or possession in public is fined. Private "cannabis social clubs" operate in a legal grey area. Sale is illegal.',
+    legal: 'Private use and home growing are not crimes, but use or possession in public is fined. Private "cannabis social clubs" operate in a legal grey area and face growing inspections and court challenges. Sale is illegal.',
     culture: 'Barcelona is Europe\'s cannabis-club capital and hosts the Spannabis trade fair.',
     wiki: 'Cannabis_in_Spain',
   },
   {
     id: 'paris', city: 'Paris', region: 'France', cc: 'FR', lat: 48.86, lng: 2.35, tz: 'Europe/Paris', status: 'illegal',
-    legal: 'Illegal. Since 2020 police can issue an on-the-spot fine of €200 for use; the law allows far heavier penalties. A medical pilot programme ran from 2021 and has ended.',
+    legal: 'Illegal. Since 2020 police can issue an on-the-spot fine of €200 for use (an increase has been proposed); the law allows far heavier penalties. A medical pilot ran from 2021 to 2024, and a permanent medical framework has been slow to arrive.',
     culture: 'In the 1840s Paris\'s Club des Hashischins gathered writers like Baudelaire, Gautier and Dumas.',
     wiki: 'Cannabis_in_France',
   },
   {
-    id: 'prague', city: 'Prague', region: 'Czechia', cc: 'CZ', lat: 50.08, lng: 14.44, tz: 'Europe/Prague', status: 'decriminalised',
-    legal: 'Small amounts (up to about 15 g) and a few plants are a misdemeanour, not a crime. Medical cannabis legal since 2013. Wider legalisation has been under discussion.',
+    id: 'prague', city: 'Prague', region: 'Czechia', cc: 'CZ', lat: 50.08, lng: 14.44, tz: 'Europe/Prague', status: 'legal',
+    legal: 'Since 1 January 2026, adults 21+ may possess up to 100 g at home (25 g in public) and grow up to 3 plants. Sale and commercial production remain illegal, and exceeding the limits is an offence. Medical cannabis legal since 2013.',
     culture: 'Prague stages a Million Marijuana March.',
     wiki: 'Cannabis_in_the_Czech_Republic',
   },
   {
     id: 'valletta', city: 'Valletta', region: 'Malta', cc: 'MT', lat: 35.9, lng: 14.51, tz: 'Europe/Malta', status: 'legal',
-    legal: 'First EU country to legalise (2021): adults 18+ may carry 7 g, grow 4 plants at home or join non-profit cannabis associations. Public use is banned.',
+    legal: 'First EU country to legalise (2021): adults 18+ may carry 7 g, grow 4 plants at home or join non-profit cannabis associations. Public use is banned, and rules have tightened since; UK travel advice describes the allowance as for residents only.',
     culture: 'A small island that moved first, with a dedicated regulator, ARUC.',
     wiki: 'Cannabis_in_Malta',
   },
@@ -183,13 +183,13 @@ export const PLACES: Place[] = [
   },
   {
     id: 'athens', city: 'Athens', region: 'Greece', cc: 'GR', lat: 37.98, lng: 23.73, tz: 'Europe/Athens', status: 'medical',
-    legal: 'Recreational possession is illegal. Medical cannabis is legal and licensed cultivation for medical use and export has been allowed since 2018.',
+    legal: 'Recreational possession is illegal. Medical cannabis has been legal since 2017, with a restrictive system and no home growing. A 2026 law banned retail sale of dried flower.',
     culture: 'Herodotus described Scythians inhaling cannabis smoke in tents.',
     wiki: 'Cannabis_in_Greece',
   },
   {
     id: 'johannesburg', city: 'Johannesburg', region: 'South Africa', cc: 'ZA', lat: -26.2, lng: 28.05, tz: 'Africa/Johannesburg', status: 'legal',
-    legal: 'Since a 2018 Constitutional Court ruling, adults may use, possess and grow cannabis in private. Public sale remains illegal and use in public is prohibited.',
+    legal: 'Since a 2018 Constitutional Court ruling, adults may use, possess and grow cannabis in private. A 2024 Act codified this. Selling remains illegal and use in public is prohibited.',
     culture: 'The "dagga" case was brought by Julian Stobbs and Myrtle Clarke, the "Dagga Couple".',
     wiki: 'Cannabis_in_South_Africa',
   },
@@ -201,7 +201,7 @@ export const PLACES: Place[] = [
   },
   {
     id: 'tel-aviv', city: 'Tel Aviv', region: 'Israel', cc: 'IL', lat: 32.09, lng: 34.78, tz: 'Asia/Jerusalem', status: 'decriminalised',
-    legal: 'Medical cannabis is established and widely prescribed. Personal use is treated mostly with fines rather than prosecution; sale is illegal.',
+    legal: 'Medical cannabis is established and widely prescribed. Since 2022, personal use and possession are mostly handled with administrative fines rather than criminal charges, though repeat offences can be prosecuted. Sale is illegal.',
     culture: 'Raphael Mechoulam isolated THC in Israel in 1964, making the country a research hub.',
     wiki: 'Cannabis_in_Israel',
   },
@@ -243,13 +243,13 @@ export const PLACES: Place[] = [
   },
   {
     id: 'kathmandu', city: 'Kathmandu', region: 'Nepal', cc: 'NP', lat: 27.72, lng: 85.32, tz: 'Asia/Kathmandu', status: 'illegal',
-    legal: 'Sale was banned in 1973 and the 1976 narcotics law keeps cannabis illegal, though enforcement is lighter around Shivaratri. Periodic bills propose legalisation.',
+    legal: 'Sale was banned in 1973 and the 1976 narcotics law keeps cannabis illegal, though enforcement is lighter around Shivaratri. Gandaki province passed a law in 2026 allowing licensed medical and industrial cultivation, but the national ban stands.',
     culture: 'Freak Street was a stop on the 1960s–70s hippie trail; sadhus smoke at Pashupatinath on Maha Shivaratri.',
     wiki: 'Cannabis_in_Nepal',
   },
   {
-    id: 'bangkok', city: 'Bangkok', region: 'Thailand', cc: 'TH', lat: 13.76, lng: 100.5, tz: 'Asia/Bangkok', status: 'decriminalised',
-    legal: 'Removed from the narcotics list in 2022, a first for Asia. Since mid-2025 buying flower requires a prescription, and public smoking can bring fines.',
+    id: 'bangkok', city: 'Bangkok', region: 'Thailand', cc: 'TH', lat: 13.76, lng: 100.5, tz: 'Asia/Bangkok', status: 'medical',
+    legal: 'Removed from the narcotics list in 2022, a first for Asia, but since June 2025 flower is sold only against a prescription, and 2026 rules limit sales to licensed medical outlets. Foreign prescriptions do not count, and bringing cannabis into the country can be treated as trafficking.',
     culture: 'A traditional Thai medicine ingredient, and the 1960s–70s "Thai stick" legacy.',
     wiki: 'Cannabis_in_Thailand',
   },
@@ -261,7 +261,7 @@ export const PLACES: Place[] = [
   },
   {
     id: 'hong-kong', city: 'Hong Kong', region: 'Hong Kong', cc: 'HK', lat: 22.32, lng: 114.17, tz: 'Asia/Hong_Kong', status: 'strict',
-    legal: 'Illegal; possession can bring years of prison. Since February 2023 even CBD is classed as a dangerous drug.',
+    legal: 'Illegal; possession can bring up to 7 years in prison and a HK$1 million fine. Since February 2023 even CBD is classed as a dangerous drug.',
     culture: 'Strong enforcement, and CBD shops closed after the 2023 ban.',
     wiki: 'Cannabis_in_Hong_Kong',
   },
@@ -279,7 +279,7 @@ export const PLACES: Place[] = [
   },
   {
     id: 'tokyo', city: 'Tokyo', region: 'Japan', cc: 'JP', lat: 35.68, lng: 139.69, tz: 'Asia/Tokyo', status: 'illegal',
-    legal: 'Illegal: possession can bring up to 5 years in prison, and a 2024 reform made use itself an offence. Some CBD products are allowed.',
+    legal: 'Illegal. Since December 2024 use itself is an offence, and use and possession can each bring up to 7 years in prison. Some CBD products and cannabis-based medicines are allowed.',
     culture: 'Hemp ("asa") is sacred in Shinto, used in shimenawa ropes and priests\' wands.',
     wiki: 'Cannabis_in_Japan',
   },
